@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Color guessing game</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <h1>Color Guessing Game</h1>
+    <button type="button" onclick="runGame()">Start Game</button>
+    <script>
+        const COLORS_ARRAY = ['yellow', 'cyan', 'gold', 'gray', 'green', 'magenta', 'orange', 'red', 'white', 'blue']
+        const targetIndex = Math.floor(Math.random() * COLORS_ARRAY.length);
+        const target = COLORS_ARRAY[targetIndex];
+        let guess = '';
+        let correct = false;
+        console.log(target);
+        let numTries = 0
+
+
+        function runGame() {
+
+            do {
+                guess = prompt('I am thinking of one of these colors:\n\n' + COLORS_ARRAY.join(', ') + '\n\nWhat color am I thinking of?\n')
+                numTries += 1;
+                if (guess === null) {
+                    alert('Thanks for playing!');
+                    return;
+                }
+
+                correct = checkGuess(guess, target)
+
+            }
+            while (!correct);
+            alert('Congratulations! Its the right color!\n\n' + 'It took you ' + numTries + ' guesses to finish the game!\n\n' + 'Click OK to see the color in the background.');
+            document.body.style.background = guess;
+        }
+
+        function checkGuess(guess, target) {
+            let correct = false;
+            console.log(guess);
+            if (!COLORS_ARRAY.includes(guess)) {
+                alert('I do not have that on my list');
+            } else if (guess > target) {
+                alert('Too high up in the Alphabet');
+            } else if (guess < target) {
+                alert('Too low in the Alphabet');
+            } else {
+                correct = true;
+            }
+            return correct;
+        }
+    </script>
+</body>
+
+</html>
+<!--C:\NucampFolder\1-HTML-CSS-JavaScript\Class_Projects\Week3project.html-->
